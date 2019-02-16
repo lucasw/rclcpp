@@ -111,6 +111,9 @@ Executor::~Executor()
 void
 Executor::add_node(rclcpp::node_interfaces::NodeBaseInterface::SharedPtr node_ptr, bool notify)
 {
+  if (node_ptr == nullptr) {
+    throw std::runtime_error("Node is uninitialized");
+  }
   // If the node already has an executor
   std::atomic_bool & has_executor = node_ptr->get_associated_with_executor_atomic();
   if (has_executor.exchange(true)) {
