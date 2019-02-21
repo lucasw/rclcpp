@@ -88,7 +88,7 @@ public:
    * in the node.
    */
   RCLCPP_PUBLIC
-  void init(
+  virtual void init(
     const std::string & node_name,
     const std::string & namespace_,
     rclcpp::Context::SharedPtr context,
@@ -106,7 +106,7 @@ public:
    * pipeline to pass messages between nodes in the same process using shared memory.
    */
   RCLCPP_PUBLIC
-  void init(
+  virtual void init(
     const std::string & node_name,
     const std::string & namespace_ = "",
     bool use_intra_process_comms = false);

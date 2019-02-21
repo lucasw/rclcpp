@@ -126,42 +126,16 @@ Node::Node(
   bool use_global_arguments,
   bool use_intra_process_comms,
   bool start_parameter_services)
-// TODO(lucasw) call init instead of this?
-: node_base_(new rclcpp::node_interfaces::NodeBase(
-      node_name, namespace_, context, arguments, use_global_arguments)),
-  node_graph_(new rclcpp::node_interfaces::NodeGraph(node_base_.get())),
-  node_logging_(new rclcpp::node_interfaces::NodeLogging(node_base_.get())),
-  node_timers_(new rclcpp::node_interfaces::NodeTimers(node_base_.get())),
-  node_topics_(new rclcpp::node_interfaces::NodeTopics(node_base_.get())),
-  node_services_(new rclcpp::node_interfaces::NodeServices(node_base_.get())),
-  node_clock_(new rclcpp::node_interfaces::NodeClock(
-      node_base_,
-      node_topics_,
-      node_graph_,
-      node_services_,
-      node_logging_
-    )),
-  node_parameters_(new rclcpp::node_interfaces::NodeParameters(
-      node_base_,
-      node_topics_,
-      node_services_,
-      node_clock_,
-      initial_parameters,
-      use_intra_process_comms,
-      start_parameter_services
-    )),
-  node_time_source_(new rclcpp::node_interfaces::NodeTimeSource(
-      node_base_,
-      node_topics_,
-      node_graph_,
-      node_services_,
-      node_logging_,
-      node_clock_,
-      node_parameters_
-    )),
-  node_waitables_(new rclcpp::node_interfaces::NodeWaitables(node_base_.get())),
-  use_intra_process_comms_(use_intra_process_comms)
 {
+  init(
+      node_name,
+      namespace_,
+      context,
+      arguments,
+      initial_parameters,
+      use_global_arguments,
+      use_intra_process_comms,
+      start_parameter_services);
 }
 
 Node::~Node()
