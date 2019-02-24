@@ -81,6 +81,11 @@ void Node::init(
   bool use_intra_process_comms,
   bool start_parameter_services)
 {
+  // check to see if already initialized
+  if (node_base_ != nullptr) {
+    throw std::runtime_error("can't currently re-initialize already initialized node for " +
+        namespace_ + " " + node_name);
+  }
   node_base_.reset(new rclcpp::node_interfaces::NodeBase(
       node_name, namespace_, context, arguments, use_global_arguments));
   node_graph_.reset(new rclcpp::node_interfaces::NodeGraph(node_base_.get()));
